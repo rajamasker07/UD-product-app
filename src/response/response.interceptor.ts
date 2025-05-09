@@ -1,6 +1,6 @@
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
-import { map, Observable } from 'rxjs';
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor, HttpStatus, BadRequestException } from '@nestjs/common';
 import { ResponseInterface } from './response.interface';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
@@ -11,7 +11,8 @@ export class ResponseInterceptor implements NestInterceptor {
         status: response.status,
         message: response.message,
         data: response.data,
-      })),
-    );
+      }))
+    )
   }
+
 }
